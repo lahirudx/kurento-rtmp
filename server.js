@@ -32,7 +32,7 @@ const NodeMediaServer = require('node-media-server');
 var argv = minimist(process.argv.slice(2), {
     default: {
         as_uri: 'https://localhost:8443/',
-        ws_uri: 'ws://localhost:8888/kurento'
+        ws_uri: 'ws://52.27.166.165:8888/kurento'
     }
 });
 
@@ -382,13 +382,23 @@ a=rtpmap:96 H264/90000
 function bindFFmpeg(streamip, streamport, sdpData, ws) {
     fs.writeFileSync(streamip + '_' + streamport + '.sdp', sdpData);
     var ffmpeg_args = [
-        '-protocol_whitelist', 'file,udp,rtp',
-        '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
+        // '-protocol_whitelist', 'file,udp,rtp',
+        '-i', path.join(__dirname, 'test.flv'),
         '-vcodec', 'copy',
         '-acodec', 'copy',
         '-f', 'flv',
+        '-flvflags', 'no_duration_filesize',
         'rtmp://localhost/live/' + streamip + '_' + streamport
+        // path.join(__dirname, 'test.flv')
     ].concat();
+    // var ffmpeg_args = [
+    //     '-protocol_whitelist', 'file,udp,rtp',
+    //     '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
+    //     '-vcodec', 'copy',
+    //     '-acodec', 'copy',
+    //     '-f', 'flv',
+    //     'rtmp://localhost/live/' + streamip + '_' + streamport
+    // ].concat();
     var child = spawn('ffmpeg', ffmpeg_args);
     ws.send(JSON.stringify({
         id: 'rtmp',
