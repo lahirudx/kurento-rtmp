@@ -2,3 +2,4 @@
 /node_modules
 test.h264
 *.sdp
+/static/bower_components
