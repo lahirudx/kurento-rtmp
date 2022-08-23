@@ -393,7 +393,6 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
         'rtmps://live-api-s.facebook.com:443/rtmp/2971363696343277?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbzHmoiFg4ZXQ2ws'
     ].concat();
 
-    // For rtp stream.
     // var ffmpeg_args = [
     //     '-protocol_whitelist', 'file,udp,rtp',
     //     '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
