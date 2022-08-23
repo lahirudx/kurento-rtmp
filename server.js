@@ -390,7 +390,7 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
         '-i', path.join(__dirname, 'test.flv'),
         '-f', 'flv',
         '-flvflags', 'no_duration_filesize',
-        'rtmps://live-api-s.facebook.com:443/rtmp/2971363696343277?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbzHmoiFg4ZXQ2ws'
+        'rtmps://live-api-s.facebook.com:443/rtmp/2971908729622107?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abxxz50xSB7h-Jfm'
     ].concat();
 
     // var ffmpeg_args = [
