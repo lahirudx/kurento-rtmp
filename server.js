@@ -43,6 +43,7 @@ var options =
 };
 
 const rtmp_server_config = {
+    logType: 3,
     rtmp: {
         port: 1935,
         chunk_size: 60000,
@@ -299,14 +300,14 @@ function connectMediaElements(webRtcEndpoint, rtpEndpoint, callback) {
             return callback(error);
         }
 
-        webRtcEndpoint.connect(webRtcEndpoint, function (error) {
-            if (error) {
-                return callback(error);
-            }
-            return callback(null);
-        });
+        // webRtcEndpoint.connect(webRtcEndpoint, function (error) {
+        //     if (error) {
+        //         return callback(error);
+        //     }
+        //     return callback(null);
+        // });
 
-        // return callback(null);
+        return callback(null);
     });
 }
 
@@ -381,16 +382,18 @@ a=rtpmap:96 H264/90000
 */
 function bindFFmpeg(streamip, streamport, sdpData, ws) {
     fs.writeFileSync(streamip + '_' + streamport + '.sdp', sdpData);
+
+    // Stream a flv file.
     var ffmpeg_args = [
-        // '-protocol_whitelist', 'file,udp,rtp',
+        '-re',
+        '-stream_loop', 0,
         '-i', path.join(__dirname, 'test.flv'),
-        '-vcodec', 'copy',
-        '-acodec', 'copy',
         '-f', 'flv',
         '-flvflags', 'no_duration_filesize',
-        'rtmp://localhost/live/' + streamip + '_' + streamport
-        // path.join(__dirname, 'test.flv')
+        'rtmps://live-api-s.facebook.com:443/rtmp/2971363696343277?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbzHmoiFg4ZXQ2ws'
     ].concat();
+
+    // For rtp stream.
     // var ffmpeg_args = [
     //     '-protocol_whitelist', 'file,udp,rtp',
     //     '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
