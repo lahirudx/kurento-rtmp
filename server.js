@@ -32,7 +32,8 @@ const NodeMediaServer = require('node-media-server');
 var argv = minimist(process.argv.slice(2), {
     default: {
         as_uri: 'https://localhost:8443/',
-        ws_uri: 'ws://52.27.166.165:8888/kurento'
+        // ws_uri: 'ws://52.27.166.165:8888/kurento',
+        ws_uri: 'ws://localhost:8888/kurento'
     }
 });
 
@@ -184,6 +185,7 @@ function getKurentoClient(callback) {
 }
 
 function start(sessionId, ws, sdpOffer, callback) {
+    console.log({ sdpOffer });
     if (!sessionId) {
         return callback('Cannot use undefined sessionId');
     }
@@ -240,6 +242,8 @@ function start(sessionId, ws, sdpOffer, callback) {
                             if (err) {
                                 return callback(error);
                             }
+
+                            console.log({ sdpRtpOfferString });
                             rtpEndpoint.processOffer(sdpRtpOfferString, function (error) {
                                 if (error) {
                                     return callback(error);
@@ -357,7 +361,7 @@ function generateSdpStreamConfig(nodeStreamIp, port, audioport, callback) {
     sdpRtpOfferString += 'a=fmtp:97 profile-level-id=1;mode=AAC-hbr;sizelength=13;indexlength=3;indexdeltalength=3;config=1508\n';
     sdpRtpOfferString += 'm=video ' + port + ' RTP/AVP 96\n';
     sdpRtpOfferString += 'a=rtpmap:96 H264/90000\n';
-    sdpRtpOfferString += 'a=fmtp:96 packetization-mode=1\n';
+    sdpRtpOfferString += 'a=fmtp:96 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001E\n';
     return callback(null, sdpRtpOfferString);
 }
 
@@ -384,23 +388,27 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
     fs.writeFileSync(streamip + '_' + streamport + '.sdp', sdpData);
 
     // Stream a flv file.
-    var ffmpeg_args = [
-        '-re',
-        '-stream_loop', 0,
-        '-i', path.join(__dirname, 'test.flv'),
-        '-f', 'flv',
-        '-flvflags', 'no_duration_filesize',
-        'rtmps://live-api-s.facebook.com:443/rtmp/2971908729622107?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abxxz50xSB7h-Jfm'
-    ].concat();
-
     // var ffmpeg_args = [
-    //     '-protocol_whitelist', 'file,udp,rtp',
-    //     '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
-    //     '-vcodec', 'copy',
-    //     '-acodec', 'copy',
+    //     '-re',
+    //     '-stream_loop', 0,
+    //     '-i', path.join(__dirname, 'test.flv'),
     //     '-f', 'flv',
-    //     'rtmp://localhost/live/' + streamip + '_' + streamport
+    //     '-flvflags', 'no_duration_filesize',
+    //     'rtmps://live-api-s.facebook.com:443/rtmp/2971908729622107?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abxxz50xSB7h-Jfm'
     // ].concat();
+
+    var ffmpeg_args = [
+        '-analyzeduration', '1000M',
+        '-probesize', '1000M',
+        '-protocol_whitelist', 'file,udp,rtp',
+        '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
+        '-g', '2',
+        '-vcodec', 'libx264',
+        '-s:v', '640x480',
+        '-acodec', 'aac',
+        '-f', 'flv',
+        'rtmp://localhost/live/' + streamip + '_' + streamport
+    ].concat();
     var child = spawn('ffmpeg', ffmpeg_args);
     ws.send(JSON.stringify({
         id: 'rtmp',
