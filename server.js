@@ -185,15 +185,23 @@ function getKurentoClient(callback) {
 }
 
 function start(sessionId, ws, sdpOffer, callback) {
-    console.log({ sdpOffer });
+    // console.log({ sdpOffer });
     if (!sessionId) {
         return callback('Cannot use undefined sessionId');
     }
 
-    getKurentoClient(function(error, kurentoClient) {
+    getKurentoClient(async function(error, kurentoClient) {
         if (error) {
             return callback(error);
         }
+
+        const ep = await kurentoClient.getMediaobjectById('4735b1f4-2028-43a7-b2af-74a4e9865deb_kurento.MediaPipeline/edba3cce-915b-4b1d-93dd-408e2b48a6d6_kurento.WebRtcEndpoint', obj => {
+            console.log({obj});
+        })
+
+        console.log({ep});
+
+        // return;
 
         kurentoClient.create('MediaPipeline', function(error, pipeline) {
             if (error) {
@@ -251,6 +259,7 @@ function start(sessionId, ws, sdpOffer, callback) {
                                 console.log('start process on: rtp://' + streamIp + ':' + streamPort);
                                 console.log('recv sdp answer:', sdpAnswer);
                                 var _ffmpeg_child = bindFFmpeg(streamIp, streamPort, sdpRtpOfferString, ws);
+                                var _ffmpeg_child = undefined;
                                 sessions[sessionId] = {
                                     'pipeline': pipeline,
                                     'webRtcEndpoint': webRtcEndpoint,
@@ -304,14 +313,14 @@ function connectMediaElements(webRtcEndpoint, rtpEndpoint, callback) {
             return callback(error);
         }
 
-        // webRtcEndpoint.connect(webRtcEndpoint, function (error) {
-        //     if (error) {
-        //         return callback(error);
-        //     }
-        //     return callback(null);
-        // });
+        webRtcEndpoint.connect(webRtcEndpoint, function (error) {
+            if (error) {
+                return callback(error);
+            }
+            return callback(null);
+        });
 
-        return callback(null);
+        // return callback(null);
     });
 }
 
@@ -398,14 +407,11 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
     // ].concat();
 
     var ffmpeg_args = [
-        '-analyzeduration', '1000M',
-        '-probesize', '1000M',
         '-protocol_whitelist', 'file,udp,rtp',
         '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
-        '-g', '2',
-        '-vcodec', 'libx264',
-        '-s:v', '640x480',
-        '-acodec', 'aac',
+        '-vcodec', 'copy',
+        '-acodec', 'copy',
+        '-g', '24',
         '-f', 'flv',
         'rtmp://localhost/live/' + streamip + '_' + streamport
     ].concat();
