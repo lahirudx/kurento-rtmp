@@ -385,7 +385,6 @@ function generateSdpStreamConfig(nodeStreamIp, port, audioport, callback) {
     sdpRtpOfferString += 'm=video ' + port + ' RTP/AVP 96\n';
     sdpRtpOfferString += 'a=rtpmap:96 H264/90000\n';
     sdpRtpOfferString += 'a=fmtp:96 packetization-mode=1\n';
-    //sdpRtpOfferString += 'a=fmtp:96 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001E\n';
     return callback(null, sdpRtpOfferString);
 }
 
@@ -424,9 +423,10 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
     // ].concat();
 
     var ffmpeg_args = [
-        '-v','trace',
+        '-protocol_whitelist', 'file,udp,rtp',
         '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
-        '-c','copy',
+        '-vcodec', 'copy',
+        '-acodec', 'copy',
         '-f', 'flv',
         'rtmp://localhost/live/' + streamip + '_' + streamport
     ].concat();
