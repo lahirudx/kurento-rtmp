@@ -32,8 +32,8 @@ const NodeMediaServer = require('node-media-server');
 var argv = minimist(process.argv.slice(2), {
     default: {
         as_uri: 'https://localhost:8443/',
-        // ws_uri: 'ws://52.27.166.165:8888/kurento',
-        ws_uri: 'ws://localhost:8888/kurento'
+        ws_uri: 'ws://52.27.166.165:8888/kurento',
+        // ws_uri: 'ws://localhost:8888/kurento'
     }
 });
 
@@ -124,7 +124,7 @@ wss.on('connection', function(ws, req) {
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
-        console.log('Connection ' + sessionId + ' received message ', message);
+        // console.log('Connection ' + sessionId + ' received message ', message);
 
         switch (message.id) {
         case 'start':
@@ -190,16 +190,29 @@ function start(sessionId, ws, sdpOffer, callback) {
         return callback('Cannot use undefined sessionId');
     }
 
-    getKurentoClient(async function(error, kurentoClient) {
+    getKurentoClient(function(error, kurentoClient) {
         if (error) {
             return callback(error);
         }
 
-        const ep = await kurentoClient.getMediaobjectById('4735b1f4-2028-43a7-b2af-74a4e9865deb_kurento.MediaPipeline/edba3cce-915b-4b1d-93dd-408e2b48a6d6_kurento.WebRtcEndpoint', obj => {
-            console.log({obj});
-        })
+        // const pipeline_id = '6ff833e5-71eb-401e-89ab-6e033c5cae62_kurento.MediaPipeline';
 
-        console.log({ep});
+        // kurentoClient.getMediaobjectById(pipeline_id).then(mediaObject => {
+        //     console.log(mediaObject);
+        //     mediaObject.getChildren().then(collection => {
+        //         console.log(collection);
+        //         collection.forEach(endpoint => {
+        //             endpoint.getConnectionState().then(state => {
+        //                 console.log('CONNECTION STATE: ' + endpoint.id + ' ' + state);
+        //             });
+        //             endpoint.getMediaState().then(state => {
+        //                 console.log('MEDIA STATE: ' + endpoint.id + ' ' + state);
+        //             });
+        //         });
+        //     });
+        // });
+
+        // console.log({ep});
 
         // return;
 
@@ -245,7 +258,8 @@ function start(sessionId, ws, sdpOffer, callback) {
                         var streamPort = 55000 + (session_index * 2);
                         var audioPort = 49170 + (session_index * 2);
                         session_index++;    //change to next port
-                        var streamIp = '127.0.0.1';//Test ip
+                        // var streamIp = '127.0.0.1';//Test ip
+                        var streamIp = '54.190.82.51';//Test ip
                         generateSdpStreamConfig(streamIp, streamPort, audioPort, function (err, sdpRtpOfferString) {
                             if (err) {
                                 return callback(error);
@@ -370,9 +384,12 @@ function generateSdpStreamConfig(nodeStreamIp, port, audioport, callback) {
     sdpRtpOfferString += 'a=fmtp:97 profile-level-id=1;mode=AAC-hbr;sizelength=13;indexlength=3;indexdeltalength=3;config=1508\n';
     sdpRtpOfferString += 'm=video ' + port + ' RTP/AVP 96\n';
     sdpRtpOfferString += 'a=rtpmap:96 H264/90000\n';
-    sdpRtpOfferString += 'a=fmtp:96 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001E\n';
+    sdpRtpOfferString += 'a=fmtp:96 packetization-mode=1\n';
+    //sdpRtpOfferString += 'a=fmtp:96 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001E\n';
     return callback(null, sdpRtpOfferString);
 }
+
+// ffplay  -protocol_whitelist rtp,file,udp   -v trace  127.0.0.1_55000.sdp
 
 /*ffmpeg 
 -protocol_whitelist "file,udp,rtp" 
@@ -407,14 +424,19 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
     // ].concat();
 
     var ffmpeg_args = [
-        '-protocol_whitelist', 'file,udp,rtp',
+        '-v','trace',
         '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
-        '-vcodec', 'copy',
-        '-acodec', 'copy',
-        '-g', '24',
+        '-c','copy',
         '-f', 'flv',
         'rtmp://localhost/live/' + streamip + '_' + streamport
     ].concat();
+    /*
+            '-g', '24',
+        '-protocol_whitelist', 'file,udp,rtp',
+
+    '-vcodec', 'copy',
+    '-acodec', 'copy',
+*/
     var child = spawn('ffmpeg', ffmpeg_args);
     ws.send(JSON.stringify({
         id: 'rtmp',

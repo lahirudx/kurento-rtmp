@@ -1,0 +1,30 @@
+docker run  \
+    -p 8888:8888/tcp \
+    -p 8000:8000/tcp \
+    -p 1935:1935/tcp \
+    -p 8443:8443/tcp \
+    -p 55000-55055:55000-55055/udp \
+    -e KMS_MIN_PORT=55000 \
+    -e KMS_MAX_PORT=55055 \
+    kurento/kurento-media-server:latest
+
+apt update 
+apt install git software-properties-common
+add-apt-repository ppa:savoury1/ffmpeg4
+apt update 
+apt install ffmpeg 
+
+git clone https://github.com/godka/kurento-rtmp.git
+git clone https://github.com/Kurento/kurento-tutorial-node.git
+
+cp -vr kurento-tutorial-node/kurento-hello-world/keys  kurento-rtmp/
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install 16
+ffmpeg -i rtmp://localhost/live/127.0.0.1_55000 -c:v rawvideo -pix_fmt rgb24 -f caca -
+
+
+kurento -> rtp -> ffmpeg 
+ip:500 -> ffmepg 
+docker - onde pc - 127.0.0.1
+

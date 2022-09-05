@@ -1,0 +1,5 @@
+web-page -> node.js -> kerent.sever -> ffplay(!)
+1 - web-page -> kerento 
+2 - kurento - >ffmpeg -> rtmp
+----
+
