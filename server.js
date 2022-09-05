@@ -53,7 +53,7 @@ const rtmp_server_config = {
         ping_timeout: 30
     },
     http: {
-        port: 8000,
+        port: 3000,
         allow_origin: '*'
     }
 };
@@ -428,7 +428,8 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
         '-vcodec', 'copy',
         '-acodec', 'copy',
         '-f', 'flv',
-        'rtmp://localhost/live/' + streamip + '_' + streamport
+        // 'rtmp://localhost/live/' + streamip + '_' + streamport
+        'rtmps://live-api-s.facebook.com:443/rtmp/2984459301700383?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abyyh1du2Rh1Hc85'
     ].concat();
     /*
             '-g', '24',
