@@ -238,7 +238,7 @@ function start(sessionId, ws, sdpOffer, callback) {
                         var audioPort = 49170 + (session_index * 2);
                         session_index++;    //change to next port
                         // var streamIp = '127.0.0.1';//Test ip
-                        var streamIp = '54.190.82.51';//Test ip
+                        var streamIp = '52.33.38.36';//Test ip
                         generateSdpStreamConfig(streamIp, streamPort, audioPort, function (err, sdpRtpOfferString) {
                             if (err) {
                                 return callback(error);
