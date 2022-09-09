@@ -195,27 +195,6 @@ function start(sessionId, ws, sdpOffer, callback) {
             return callback(error);
         }
 
-        // const pipeline_id = '6ff833e5-71eb-401e-89ab-6e033c5cae62_kurento.MediaPipeline';
-
-        // kurentoClient.getMediaobjectById(pipeline_id).then(mediaObject => {
-        //     console.log(mediaObject);
-        //     mediaObject.getChildren().then(collection => {
-        //         console.log(collection);
-        //         collection.forEach(endpoint => {
-        //             endpoint.getConnectionState().then(state => {
-        //                 console.log('CONNECTION STATE: ' + endpoint.id + ' ' + state);
-        //             });
-        //             endpoint.getMediaState().then(state => {
-        //                 console.log('MEDIA STATE: ' + endpoint.id + ' ' + state);
-        //             });
-        //         });
-        //     });
-        // });
-
-        // console.log({ep});
-
-        // return;
-
         kurentoClient.create('MediaPipeline', function(error, pipeline) {
             if (error) {
                 return callback(error);
@@ -429,7 +408,7 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
         '-acodec', 'copy',
         '-f', 'flv',
         // 'rtmp://localhost/live/' + streamip + '_' + streamport
-        'rtmps://live-api-s.facebook.com:443/rtmp/2984459301700383?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abyyh1du2Rh1Hc85'
+        'rtmps://live-api-s.facebook.com:443/rtmp/2988661427946837?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abx40U71VrINQXsd'
     ].concat();
     /*
             '-g', '24',
