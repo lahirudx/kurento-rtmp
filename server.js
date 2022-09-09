@@ -402,14 +402,23 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
     // ].concat();
 
     var ffmpeg_args = [
+	    //'-v','trace',
         '-protocol_whitelist', 'file,udp,rtp',
         '-i', path.join(__dirname, streamip + '_' + streamport + '.sdp'),
-        '-vcodec', 'copy',
-        '-acodec', 'copy',
+        //'-vcodec', 'copy',
+        //'-acodec', 'copy',
+	'-c:a','aac',
+	'-c:v','libx264','-pix_fmt','yuv420p',
         '-f', 'flv',
         // 'rtmp://localhost/live/' + streamip + '_' + streamport
-        'rtmps://live-api-s.facebook.com:443/rtmp/2988717237941256?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Aby-J7URsxzrFeGe'
+	//'rtmps://live-api-s.facebook.com:443/rtmp/2988742661272047?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abxkgdm5sIsJC3I9'
+	    //'rtmps://live-api-s.facebook.com:443/rtmp/2988761334603513?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abwbo-PKcA2Fqc_f'
+	    'rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q'
     ].concat();
+	console.log( ffmpeg_args );
+	// DEBUG!!!!
+	ffmpeg_args = ['-version'];
+
     /*
             '-g', '24',
         '-protocol_whitelist', 'file,udp,rtp',

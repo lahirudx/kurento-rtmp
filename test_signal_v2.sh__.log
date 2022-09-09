@@ -1,0 +1,187 @@
+ffmpeg version 4.2.7-0ubuntu0.1 Copyright (c) 2000-2022 the FFmpeg developers
+  built with gcc 9 (Ubuntu 9.4.0-1ubuntu1~20.04.1)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-nvenc --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 31.100 / 56. 31.100
+  libavcodec     58. 54.100 / 58. 54.100
+  libavformat    58. 29.100 / 58. 29.100
+  libavdevice    58.  8.100 / 58.  8.100
+  libavfilter     7. 57.100 /  7. 57.100
+  libavresample   4.  0.  0 /  4.  0.  0
+  libswscale      5.  5.100 /  5.  5.100
+  libswresample   3.  5.100 /  3.  5.100
+  libpostproc    55.  5.100 / 55.  5.100
+Splitting the commandline.
+Reading option '-fflags' ... matched as AVOption 'fflags' with argument '+genpts'.
+Reading option '-v' ... matched as option 'v' (set logging level) with argument 'trace'.
+Reading option '-protocol_whitelist' ... matched as AVOption 'protocol_whitelist' with argument 'file,udp,rtp'.
+Reading option '-i' ... matched as input url with argument '/home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp'.
+Reading option '-c:a' ... matched as option 'c' (codec name) with argument 'copy'.
+Reading option '-c:v' ... matched as option 'c' (codec name) with argument 'copy'.
+Reading option '-f' ... matched as option 'f' (force format) with argument 'flv'.
+Reading option 'rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q' ... matched as output url.
+Finished splitting the commandline.
+Parsing a group of options: global .
+Applying option v (set logging level) with argument trace.
+Successfully parsed a group of options.
+Parsing a group of options: input url /home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp.
+Successfully parsed a group of options.
+Opening an input file: /home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp.
+[NULL @ 0x562471ff47c0] Opening '/home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp' for reading
+Probing sdp score:50 size:302
+[sdp @ 0x562471ff47c0] Format sdp probed with size=2048 and score=50
+[sdp @ 0x562471ff47c0] sdp: v='0'
+[sdp @ 0x562471ff47c0] sdp: o='- 0 0 IN IP4 52.33.38.36'
+[sdp @ 0x562471ff47c0] sdp: s='KMS'
+[sdp @ 0x562471ff47c0] sdp: c='IN IP4 52.33.38.36'
+[sdp @ 0x562471ff47c0] sdp: t='0 0'
+[sdp @ 0x562471ff47c0] sdp: m='audio 49170 RTP/AVP 97'
+[sdp @ 0x562471ff47c0] sdp: a='recvonly'
+[sdp @ 0x562471ff47c0] sdp: a='rtpmap:97 PCMU/8000'
+[sdp @ 0x562471ff47c0] audio codec set to: pcm_mulaw
+[sdp @ 0x562471ff47c0] audio samplerate set to: 8000
+[sdp @ 0x562471ff47c0] audio channels set to: 1
+[sdp @ 0x562471ff47c0] sdp: a='fmtp:97 profile-level-id=1;mode=AAC-hbr;sizelength=13;indexlength=3;indexdeltalength=3;config=1508'
+[sdp @ 0x562471ff47c0] sdp: m='video 55000 RTP/AVP 96'
+[sdp @ 0x562471ff47c0] sdp: a='rtpmap:96 H264/90000'
+[sdp @ 0x562471ff47c0] video codec set to: h264
+[sdp @ 0x562471ff47c0] sdp: a='fmtp:96 packetization-mode=1'
+[sdp @ 0x562471ff47c0] RTP Packetization Mode: 1
+[udp @ 0x562471ff7940] end receive buffer size reported is 131072
+[udp @ 0x562471ff7a40] end receive buffer size reported is 131072
+[sdp @ 0x562471ff47c0] setting jitter buffer size to 500
+[udp @ 0x562471ff8bc0] end receive buffer size reported is 131072
+[udp @ 0x562471ff7e80] end receive buffer size reported is 131072
+[sdp @ 0x562471ff47c0] setting jitter buffer size to 500
+[sdp @ 0x562471ff47c0] Before avformat_find_stream_info() pos: 302 bytes read:302 seeks:0 nb_streams:2
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[AVBSFContext @ 0x562472077340] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+[h264 @ 0x562472005700] non-existing PPS 0 referenced
+[h264 @ 0x562472005700] decode_slice_header error
+[h264 @ 0x562472005700] no frame!
+[AVBSFContext @ 0x562472077340] nal_unit_type: 7(SPS), nal_ref_idc: 3
+[AVBSFContext @ 0x562472077340] nal_unit_type: 8(PPS), nal_ref_idc: 3
+[AVBSFContext @ 0x562472077340] nal_unit_type: 7(SPS), nal_ref_idc: 3
+[AVBSFContext @ 0x562472077340] nal_unit_type: 8(PPS), nal_ref_idc: 3
+[AVBSFContext @ 0x562472077340] nal_unit_type: 5(IDR), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 7(SPS), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 8(PPS), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 7(SPS), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 8(PPS), nal_ref_idc: 3
+[h264 @ 0x562472005700] nal_unit_type: 5(IDR), nal_ref_idc: 3
+[h264 @ 0x562472005700] Format yuv420p chosen by get_format().
+[h264 @ 0x562472005700] Reinit context to 624x480, pix_fmt: yuv420p
+[h264 @ 0x562472005700] nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 3
+    Last message repeated 5 times
+[sdp @ 0x562471ff47c0] max_analyze_duration 5000000 reached at 5031611 microseconds st:1
+[sdp @ 0x562471ff47c0] rfps: 29.916667 0.018282
+[sdp @ 0x562471ff47c0] rfps: 30.000000 0.000340
+[sdp @ 0x562471ff47c0] rfps: 60.000000 0.001358
+[sdp @ 0x562471ff47c0] rfps: 120.000000 0.005433
+[sdp @ 0x562471ff47c0] rfps: 29.970030 0.003489
+    Last message repeated 1 times
+[sdp @ 0x562471ff47c0] rfps: 59.940060 0.013955
+    Last message repeated 1 times
+[sdp @ 0x562471ff47c0] stream 0: start_time: -1152921504606847.000 duration: -1152921504606847.000
+[sdp @ 0x562471ff47c0] stream 1: start_time: 0.034 duration: -102481911520608.625
+[sdp @ 0x562471ff47c0] format: start_time: 0.034 duration: -9223372036854.775 bitrate=0 kb/s
+[sdp @ 0x562471ff47c0] After avformat_find_stream_info() pos: 302 bytes read:302 seeks:0 frames:164
+Guessed Channel Layout for Input Stream #0.0 : mono
+Input #0, sdp, from '/home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp':
+  Metadata:
+    title           : KMS
+  Duration: N/A, start: 0.034000, bitrate: N/A
+    Stream #0:0, 0, 1/8000: Audio: pcm_mulaw, 8000 Hz, mono, s16, 64 kb/s
+    Stream #0:1, 164, 1/90000: Video: h264 (Constrained Baseline), 1 reference frame, yuv420p(progressive, left), 620x464 (624x480), 0/1, 30 tbr, 90k tbn, 180k tbc
+Successfully opened the file.
+Parsing a group of options: output url rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q.
+Applying option c:a (codec name) with argument copy.
+Applying option c:v (codec name) with argument copy.
+Applying option f (force format) with argument flv.
+Successfully parsed a group of options.
+Opening an output file: rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q.
+[rtmps @ 0x5624721db900] No default whitelist set
+[tls @ 0x562472198840] No default whitelist set
+[tcp @ 0x562472062d80] No default whitelist set
+[tcp @ 0x562472062d80] Original list of addresses:
+[tcp @ 0x562472062d80] Address 157.240.3.1 port 443
+[tcp @ 0x562472062d80] Address 2a03:2880:f001:17:face:b00c:0:1411 port 443
+[tcp @ 0x562472062d80] Interleaved list of addresses:
+[tcp @ 0x562472062d80] Address 157.240.3.1 port 443
+[tcp @ 0x562472062d80] Address 2a03:2880:f001:17:face:b00c:0:1411 port 443
+[tcp @ 0x562472062d80] Starting connection attempt to 157.240.3.1 port 443
+[tcp @ 0x562472062d80] Successfully connected to 157.240.3.1 port 443
+[rtmps @ 0x5624721db900] Handshaking...
+[rtmps @ 0x5624721db900] Type answer 3
+[rtmps @ 0x5624721db900] Server version 1.0.5.4
+[rtmps @ 0x5624721db900] Proto = rtmps, path = /rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q, app = rtmp, fname = 2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q
+[rtmps @ 0x5624721db900] Window acknowledgement size = 5000000
+[rtmps @ 0x5624721db900] Max sent, unacked = 5000000
+[rtmps @ 0x5624721db900] New incoming chunk size = 4096
+[rtmps @ 0x5624721db900] Releasing stream...
+[rtmps @ 0x5624721db900] FCPublish stream...
+[rtmps @ 0x5624721db900] Creating stream...
+[rtmps @ 0x5624721db900] Sending publish command for '2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q'
+[rtmps @ 0x5624721db900] Server error: Publish Rejected
+rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q: Operation not permitted
+[AVIOContext @ 0x562471ffd5c0] Statistics: 302 bytes read, 0 seeks
