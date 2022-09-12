@@ -1,35 +1,29 @@
 ffmpeg \
-	-fflags nobuffer \
-	2>&1 \
 -v trace  \
--rtbufsize 128000k \
+	2>&1 \
 -protocol_whitelist \
 file,udp,rtp \
--max_interleave_delta 20000000 \
 -i \
-/home/ubuntu/kurento-rtmp/52.33.38.36_55000.sdp \
--c:a \
-copy \
--c:v copy \
+/home/ubuntu/kurento-rtmp/35.89.201.148_55000.sdp \
+-max_interleave_delta 20000000 \
+-filter_complex fps=60 \
+-an \
+-c:v libx264 -pix_fmt yuv420p  \
 -f flv \
-'rtmps://live-api-s.facebook.com:443/rtmp/2988828287930151?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbwwaJpOg18lQscG'
+'rtmps://live-api-s.facebook.com:443/rtmp/2991749514304695?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbxUgt1hyO8Y9eEj'
 
-'rtmps://live-api-s.facebook.com:443/rtmp/2988822601264053?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbwvB6QOZra5WK7p'
+'rtmps://live-api-s.facebook.com:443/rtmp/2991737027639277?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abw8_aqMn_KlNWd1'
 
-'rtmps://live-api-s.facebook.com:443/rtmp/2988812204598426?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abw5YJ0PSJ_sHtli'
+'rtmps://live-api-s.facebook.com:443/rtmp/2991733410972972?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abx505P5L6dLL60a'
+'rtmps://live-api-s.facebook.com:443/rtmp/2991726457640334?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbwX-loLqx9ZuBB5'
 
+'rtmps://live-api-s.facebook.com:443/rtmp/2991720260974287?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbwxFQozBbAuZZf5'
 exit
-'rtmps://live-api-s.facebook.com:443/rtmp/2988799594599687?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbzbmjGY6hlrP0Wz'
-exit
+'rtmps://live-api-s.facebook.com:443/rtmp/2991676217645358?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbyacDInWkjlGfyQ'
 
-'rtmps://live-api-s.facebook.com:443/rtmp/2988792881267025?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abxl3d-jI9YvM-gS'
+exit;
+'rtmps://live-api-s.facebook.com:443/rtmp/2988987931247520?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=Abz5xvS8moSXwyH2'
 
-'rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q'
-
-libx264 \
--pix_fmt \
-yuv420p \
-aac \
 --- fifo
 -f fifo \
 -fifo_format flv \
@@ -38,3 +32,6 @@ aac \
 -attempt_recovery 1 \
 -recovery_wait_time 1 \
 -queue_size 200 \
+-rtbufsize 128000k \
+	-fflags nobuffer \
+-c:a aac  \

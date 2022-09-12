@@ -238,7 +238,7 @@ function start(sessionId, ws, sdpOffer, callback) {
                         var audioPort = 49170 + (session_index * 2);
                         session_index++;    //change to next port
                         // var streamIp = '127.0.0.1';//Test ip
-                        var streamIp = '52.33.38.36';//Test ip
+                        var streamIp = '35.89.201.148';//Test ip
                         generateSdpStreamConfig(streamIp, streamPort, audioPort, function (err, sdpRtpOfferString) {
                             if (err) {
                                 return callback(error);
@@ -416,6 +416,7 @@ function bindFFmpeg(streamip, streamport, sdpData, ws) {
 	    'rtmps://live-api-s.facebook.com:443/rtmp/2988774067935573?s_bl=1&s_oil=2&s_psm=1&s_sw=0&s_tids=1&s_vt=api-s&a=AbznslL2c2J0AF9q'
     ].concat();
 	console.log( ffmpeg_args );
+	console.log( "remove it on live" );
 	// DEBUG!!!!
 	ffmpeg_args = ['-version'];
 
